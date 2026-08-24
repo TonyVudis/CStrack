@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>CS MADE SIMPLE</title>
+</head>
+<body>
+    <h1>CS2 Stat Lookup</h1>
+
+    {% with messages = get_flashed_messages() %}
+      {% if messages %}
+        <p style="color: red;">{{ messages[0] }}</p>
+      {% endif %}
+    {% endwith %}
+
+    <form action="/go" method="get">
+        <label for="steam_id">Steam64 ID:</label>
+        <input type="text" id="steam_id" name="steam_id" required>
+        <button type="submit">Look Up</button>
+    </form>
+</body>
+</html>
