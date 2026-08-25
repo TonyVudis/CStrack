@@ -34,6 +34,10 @@ def get_db_connection(Db_password, Db_user, Localhost, Db_name, Port):
 def home():
     return render_template('home.html')
 
+@app.route('/Lineups')
+def Lineups():
+    return render_template('Lineups.html')
+
 @app.route('/analysis')
 def analysis():
     return render_template('analysis.html')
