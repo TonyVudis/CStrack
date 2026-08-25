@@ -5,8 +5,6 @@ from dotenv import load_dotenv
 
 load_dotenv()
 leet_api_key = os.getenv('Leetify_API_key')
-
-load_dotenv()
 steam_api_key = os.getenv('Steam_API_key')
 
 def pull_leetify_prof(steam_id, leet_api_key):
