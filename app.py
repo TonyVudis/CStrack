@@ -48,7 +48,8 @@ def go():
     return redirect(url_for('lookup', steam_id=steam_id))
 
 @app.route('/lookup/<steam_id>')#Route for lookup
-@limiter.limit("1 per 15 seconds")#Limit per second
+@limiter.limit("1 per 5 seconds")#Limit per second
+
 
 #Leetify API - Connection with database
 def lookup(steam_id):
@@ -68,8 +69,8 @@ def lookup(steam_id):
     if result is None:
         flash("Couldnt find that Player - check Steam ID and try again")
         return redirect(url_for('home'))
-    
-    return render_template('analysis.html', data = result)
+
+    return render_template('analysis.html', data=result)
 
 
 if __name__ == '__main__':
