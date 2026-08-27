@@ -2,7 +2,7 @@ import requests
 import json
 import os
 from dotenv import load_dotenv
-from Arithmeticpd import testing
+from Arithmeticpd import past_month
 
 load_dotenv()
 leet_api_key = os.getenv('Leetify_API_key')
@@ -21,4 +21,4 @@ def pull_leetify_prof(steam_id, leet_api_key):
         return None
 
     data = response.json()
-    return testing(data)
+    return past_month(data)
