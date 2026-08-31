@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -66,13 +67,17 @@
     </header>
 
     <div class="layout">
+        <div class="player-name ">
+                <img src="{{ steaminfo.Avatar }}" alt="Profile Avatar">
+                <p>{{ steaminfo.Name }}</p>
+        </div>
 
         <div class="stats">
             {% for stat in stats %}
             <details class="stat-row">
-                <summary>{{ stat.label }}: {{ stat.value }}</summary>
+                <summary>{{ stat.name }}: {{ stat.label }}</summary>
                 <div class="stat-detail">
-                    {{ stat.name }}
+                    {{ stat.value }}
                 </div>
             </details>
             {% endfor %}

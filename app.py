@@ -1,7 +1,7 @@
 from flask import Flask, render_template, redirect, url_for, flash, request
 from flask_limiter import Limiter
 from flask_limiter.util import get_remote_address
-from sync import pull_leetify_prof
+from sync import pull_leetify_prof, pull_steam_prof
 import os
 from dotenv import load_dotenv
 import psycopg2
@@ -16,6 +16,7 @@ Port = os.getenv('PORT')
 Db_name = os.getenv('DB_NAME')
 secret_key = os.getenv('Flash_key')
 leetify_api_key = os.getenv('Leetify_API_key')
+steam_api_key = os.getenv('Steam_API_key')
 
 limiter = Limiter(get_remote_address, app=app, default_limits=["200 per hour"])#Limit per hour for API requests
 
@@ -53,8 +54,9 @@ def go():
 
 #Leetify API - Connection with database
 def lookup(steam_id):
-    result = pull_leetify_prof(steam_id, leetify_api_key)
-    success = result is not None
+    leetresult = pull_leetify_prof(steam_id, leetify_api_key)
+    steamresult = pull_steam_prof(steam_id, steam_api_key)
+    success = leetresult is not None
 
     conn = get_db_connection(Db_password, Db_user, Localhost, Db_name, Port)
     cur = conn.cursor()
@@ -66,11 +68,14 @@ def lookup(steam_id):
     cur.close()
     conn.close()
 
-    if result is None:
+    if leetresult is None:
+        flash("Couldnt find that Player - check Steam ID and try again")
+        return redirect(url_for('home'))
+    elif steamresult is None:
         flash("Couldnt find that Player - check Steam ID and try again")
         return redirect(url_for('home'))
 
-    return render_template('analysis.html', data=result)
+    return render_template('analysis.html', stats=leetresult, steaminfo=steamresult)
 
 
 if __name__ == '__main__':
