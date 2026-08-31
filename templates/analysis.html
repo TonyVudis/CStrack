@@ -2,12 +2,82 @@
 <html>
 <head>
     <title>Player Analysis</title>
+    <style>
+        body {
+            font-family: sans-serif;
+            margin: 0;
+        }
+
+        header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem 2rem;
+            border-bottom: 1px solid #ccc;
+        }
+
+        header nav a {
+            margin-left: 1.5rem;
+            text-decoration: none;
+        }
+
+        .layout {
+            display: flex;
+            padding: 2rem;
+            gap: 2rem;
+        }
+
+        .player-name {
+            flex: 1;
+            font-size: 1.5rem;
+            font-weight: bold;
+        }
+
+        .stats {
+            flex: 3;
+        }
+
+        .stat-row {
+            border-bottom: 1px solid #ddd;
+        }
+
+        .stat-row summary {
+            padding: 0.75rem 0;
+            cursor: pointer;
+            font-weight: 600;
+        }
+
+        .stat-row .stat-detail {
+            padding: 0.5rem 1rem 1rem;
+            color: #555;
+        }
+    </style>
 </head>
 <body>
-    <h1>Player Stats</h1>
 
-    <pre>{{ data }}</pre>
+    <header>
+        <a href="{{ url_for('home') }}">
+            <img src="{{ url_for('static', filename='logo.png') }}" alt="Logo" height="160">
+        </a>
+        <nav>
+            <a href="{{ url_for('analysis') }}">Analysis</a>
+            <a href="{{ url_for('Lineups') }}">Lineups</a>
+        </nav>
+    </header>
 
-    <a href="/">Look up another player</a>
+    <div class="layout">
+
+        <div class="stats">
+            {% for stat in stats %}
+            <details class="stat-row">
+                <summary>{{ stat.label }}: {{ stat.value }}</summary>
+                <div class="stat-detail">
+                    {{ stat.name }}
+                </div>
+            </details>
+            {% endfor %}
+        </div>
+    </div>
+
 </body>
 </html>
