@@ -31,9 +31,9 @@ def Goodishigher(source, high, low): #JUDGEMENT OF MEANS IN FUNCTION
     else:
         return 'red', 'Needs Work'
 
-def past_month(data):
+def past_month(leetdata):
     #sifting through for needed information
-    temp = pd.DataFrame(data)
+    temp = pd.DataFrame(leetdata)
     last_30 = temp[temp["finished_at"] >= str(past_30_days)]
     statsstart = pd.DataFrame(last_30['stats'])
     statsmiddle = pd.DataFrame(statsstart.explode('stats').reset_index(drop=True))
@@ -48,29 +48,35 @@ def past_month(data):
     stats=[] #STORES GOOD OR BAD VALS BASED ON MEANS
     #JUDGEMENT OF MEANS
     color, label = Goodislower(means['preaim'], 8.000, 11.000)
-    stats.append({'name': 'preaim', 'value': means['preaim'], 'color': color, 'label': label})
+    stats.append({'name': 'Preaim', 'value': means['preaim'], 'color': color, 'label': label})
 
     color, label = Goodislower(means['reaction_time'], 0.525, 0.700)
-    stats.append({'name': 'reaction_time', 'value': means['reaction_time'], 'color': color, 'label': label})
+    stats.append({'name': 'Reaction time', 'value': means['reaction_time'], 'color': color, 'label': label})
 
     color, label = Goodishigher(means['accuracy'], 0.23, 0.18)
-    stats.append({'name': 'accuracy', 'value': means['accuracy'], 'color': color, 'label': label})
+    stats.append({'name': 'Accuracy', 'value': means['accuracy'], 'color': color, 'label': label})
 
     color, label = Goodishigher(means['kd_ratio'], 1.0, 0.9)
-    stats.append({'name': 'kd_ratio', 'value': means['kd_ratio'], 'color': color, 'label': label})
+    stats.append({'name': 'K/D', 'value': means['kd_ratio'], 'color': color, 'label': label})
 
     color, label = Goodishigher(means['accuracy_head'], 0.28, 0.18)
-    stats.append({'name': 'accuracy_head', 'value': means['accuracy_head'], 'color': color, 'label': label})
+    stats.append({'name': 'Headshot A', 'value': means['accuracy_head'], 'color': color, 'label': label})
 
     color, label = Goodishigher(means['trade_kills_success_percentage'], 0.5, 0.35)
-    stats.append({'name': 'trade_kills_success_percentage', 'value': means['trade_kills_success_percentage'], 'color': color, 'label': label})
+    stats.append({'name': 'Successful Trading', 'value': means['trade_kills_success_percentage'], 'color': color, 'label': label})
 
     color, label = Goodishigher(means['counter_strafing_shots_good_ratio'], 0.87, 0.8)
-    stats.append({'name': 'counter_strafing_shots_good_ratio', 'value': means['counter_strafing_shots_good_ratio'], 'color': color, 'label': label})
+    stats.append({'name': 'Counter Strafing', 'value': means['counter_strafing_shots_good_ratio'], 'color': color, 'label': label})
 
     color, label = Goodislower(means['utility_on_death_avg'], 200.0, 350.0)
-    stats.append({'name': 'utility_on_death_avg', 'value': means['utility_on_death_avg'], 'color': color, 'label': label})
+    stats.append({'name': 'Utility', 'value': means['utility_on_death_avg'], 'color': color, 'label': label})
   
     html_display = statsunpack.to_html(max_cols = None, max_rows= None)
-    return means, stats
+    return stats
+
+def steamaccsort(steamdata):
+    accinfo = pd.DataFrame(steamdata['response']['players'])
+    steaminfo = ({'Name': accinfo['personaname'].iloc[0], 'Avatar': accinfo['avatar'].iloc[0]})
+
+    return steaminfo
     
