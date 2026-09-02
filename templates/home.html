@@ -1,7 +1,79 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>CS MADE SIMPLE</title>
+    <title>Player Lookup</title>
+    <style>
+        body {
+            font-family: sans-serif;
+            margin: 0;
+            background-color: #BDB7AB;
+            color: #2b0505;
+        }
+
+        header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem 2rem;
+            border-bottom: 0.5px solid #ccc;
+            background-color: #877F7D;
+            border-bottom: 0.5px solid #6b1a1a;
+        }
+
+        header nav a {
+            margin-left: 1.5rem;
+            text-decoration: none;
+            color: #f0e6e6;
+        }
+
+        .layout {
+            display: flex;
+            padding: 2rem;
+            gap: 2rem;
+        }
+
+        .player-name {
+            flex: 1;
+            font-size: 1.5rem;
+            font-weight: bold;
+            flex-direction: column; 
+            text-align: center;
+        }
+
+        .stats {
+            flex: 3;
+        }
+
+        .stat-row {
+            border-bottom: 1px solid #ddd;
+        }
+
+        .stat-row summary {
+            padding: 0.75rem 0;
+            cursor: pointer;
+            font-weight: 600;
+        }
+
+        .stat-row .stat-detail {
+            padding: 0.5rem 1rem 1rem;
+            color: #3f0c0c;
+        }
+        .stat-row.green summary {
+            border-left: 6px solid #2e7d32;
+            background-color: #eafaf1;
+        }
+
+        .stat-row.yellow summary {
+            border-left: 6px solid #d4a017;
+            background-color: #fffbe6;
+        }
+
+        .stat-row.red summary {
+            border-left: 6px solid #c62828;
+            background-color: #fdecea;
+        }
+    </style>
+</head>
 </head>
 <body>
     <h1>CS2 Stat Lookup</h1>
