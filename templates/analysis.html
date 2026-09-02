@@ -4,22 +4,36 @@
 <head>
     <title>Player Analysis</title>
     <style>
+
+        @import url('https://fonts.googleapis.com/css2?family=Black+Ops+One&display=swap');
+
+        .black-ops-one-regular {
+        font-family: "Black Ops One", system-ui;
+        font-weight: 400;
+        font-style: normal;
+        }
+
         body {
-            font-family: sans-serif;
+            font-family: "Black Ops One";
             margin: 0;
+            background-color: #BDB7AB;
+            color: #2b0505;
         }
 
         header {
             display: flex;
             justify-content: space-between;
             align-items: center;
-            padding: 1rem 2rem;
-            border-bottom: 1px solid #ccc;
+            padding: 0.5rem 3rem;
+            background-color: #877F7D;
+            border-bottom: 0.5px solid #6b1a1a;
         }
 
         header nav a {
             margin-left: 1.5rem;
+            font-size: 1.5rem;
             text-decoration: none;
+            color: #2b0505;
         }
 
         .layout {
@@ -30,27 +44,54 @@
 
         .player-name {
             flex: 1;
-            font-size: 1.5rem;
-            font-weight: bold;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            font-size: 2.5rem;
         }
 
         .stats {
-            flex: 3;
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
         }
 
         .stat-row {
-            border-bottom: 1px solid #ddd;
+            width: 75%;
+            background-color: #877F7D;
+            border: none;
+            border-radius: 16px;
+            margin-bottom: 1.25rem;
+            overflow: hidden;
         }
 
         .stat-row summary {
-            padding: 0.75rem 0;
+            padding: 1.5rem 1.75rem;
+            font-size: 1.15rem;
             cursor: pointer;
             font-weight: 600;
+            list-style: none;
         }
 
         .stat-row .stat-detail {
-            padding: 0.5rem 1rem 1rem;
-            color: #555;
+            padding: 0.75rem 1.25rem 1.25rem;
+            background-color: #a79e9e;
+            color: #2b0505;
+        }
+
+        .stat-row.green summary {
+            border-left: 20px solid #2e7d32;
+        }
+
+        .stat-row.yellow summary {
+            border-left: 20px solid #d4a017;
+        }
+
+        .stat-row.red summary {
+            border-left: 20px solid #c62828;
         }
     </style>
 </head>
@@ -68,13 +109,13 @@
 
     <div class="layout">
         <div class="player-name ">
-                <img src="{{ steaminfo.Avatar }}" alt="Profile Avatar">
+                <img src="{{ steaminfo.Avatar }}" alt="Profile Avatar" height ="400">
                 <p>{{ steaminfo.Name }}</p>
         </div>
 
         <div class="stats">
             {% for stat in stats %}
-            <details class="stat-row">
+            <details class="stat-row {{ stat.color }}">
                 <summary>{{ stat.name }}: {{ stat.label }}</summary>
                 <div class="stat-detail">
                     {{ stat.value }}
@@ -84,5 +125,34 @@
         </div>
     </div>
 
+
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script>
+        AOS.init({
+            duration: 800,
+            once: true
+        });
+    </script>
+
+    <script>
+    let lastScroll = 0;
+    const header = document.querySelector('header');
+
+    window.addEventListener('scroll', () => {
+        const currentScroll = window.scrollY;
+
+        if (currentScroll > lastScroll && currentScroll > 80) {
+            // Scrolling down - hide header
+            header.style.transform = 'translateY(-100%)';
+            header.style.transition = 'transform 0.3s ease';
+        } else {
+            // Scrolling up - show header
+            header.style.transform = 'translateY(0)';
+            header.style.transition = 'transform 0.3s ease';
+        }
+
+        lastScroll = currentScroll;
+    });
+    </script>
 </body>
 </html>
