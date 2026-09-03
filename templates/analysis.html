@@ -36,6 +36,17 @@
             color: #2b0505;
         }
 
+        .leetify-credit {
+            bottom: 1.5rem;
+            left: 1.5rem;
+            text-align: center;
+            font-size: 1.5rem;
+        }
+
+        .leetify-credit p {
+            margin: 0 0 0.4rem 0;
+        }
+
         .layout {
             display: flex;
             padding: 2rem;
@@ -102,7 +113,8 @@
             <img src="{{ url_for('static', filename='logo.png') }}" alt="Logo" height="160">
         </a>
         <nav>
-            <a href="{{ url_for('analysis') }}">Analysis</a>
+            <a href="{{ url_for('Basics') }}">Basics</a>
+            <a href="{{ url_for('About') }}">About</a>
             <a href="{{ url_for('Lineups') }}">Lineups</a>
         </nav>
     </header>
@@ -122,6 +134,14 @@
                 </div>
             </details>
             {% endfor %}
+
+            <div class="leetify-credit">
+                <p>View on Leetify: <a href="https://leetify.com/">https://leetify.com/</a></p>
+                <a href="https://leetify.com/" target="_blank" rel="noopener noreferrer">
+                    <img src="{{ url_for('static', filename='Leetify Badge Black Large.png') }}" alt="Leetify" height="100">
+                </a>
+            </div>
+            
         </div>
     </div>
 
