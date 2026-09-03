@@ -35,9 +35,13 @@ def get_db_connection(Db_password, Db_user, Localhost, Db_name, Port):
 def home():
     return render_template('home.html')
 
-@app.route('/Lineups')
-def Lineups():
-    return render_template('Lineups.html')
+@app.route('/Basics')
+def Basics():
+    return render_template('Basics.html')
+
+@app.route('/About')
+def About():
+    return render_template('About.html')
 
 @app.route('/analysis')
 def analysis():
@@ -47,6 +51,23 @@ def analysis():
 def go():
     steam_id = request.args.get('steam_id')
     return redirect(url_for('lookup', steam_id=steam_id))
+
+@app.route('/Lineups')
+def Lineups():
+    maps = [
+        {'name': 'Mirage', 'slug': 'Mirage'},
+        {'name': 'Inferno', 'slug': 'Inferno'},
+        {'name': 'Nuke', 'slug': 'Nuke'},
+        {'name': 'Ancient', 'slug': 'Ancient'},
+        {'name': 'Anubis', 'slug': 'Anubis'},
+        {'name': 'Dust 2', 'slug': 'Dust2'},
+        {'name': 'Cache', 'slug': 'Cache'}
+    ]
+    return render_template('Lineups.html', maps=maps)
+
+@app.route('/Lineups/<slug>')
+def map_detail(slug):
+    return render_template(f'{slug}.html')
 
 @app.route('/lookup/<steam_id>')#Route for lookup
 @limiter.limit("1 per 5 seconds")#Limit per second

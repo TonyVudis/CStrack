@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Lineups</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Black+Ops+One&display=swap');
+
+        .black-ops-one-regular {
+        font-family: "Black Ops One", system-ui;
+        font-weight: 400;
+        font-style: normal;
+        }
+
+        body {
+            font-family: "Black Ops One";
+            margin: 0;
+            background-color: #BDB7AB;
+            color: #2b0505;
+        }
+
+        header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0.5rem 3rem;
+            background-color: #877F7D;
+            border-bottom: 0.5px solid #6b1a1a;
+        }
+
+        header nav a {
+            margin-left: 1.5rem;
+            font-size: 1.5rem;
+            text-decoration: none;
+            color: #2b0505;
+        }
+
+        .map-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 1.5rem;
+            padding: 3rem;
+            max-width: 900px;
+            margin: 0 auto;
+        }
+
+        .map-button {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            aspect-ratio: 16 / 9;
+            background-color: #877F7D;
+            color: #2b0505;
+            font-weight: 600;
+            font-size: 1.25rem;
+            text-decoration: none;
+            border-radius: 12px;
+            transition: transform 0.15s ease, background-color 0.15s ease;
+        }
+
+        .map-button:hover {
+            transform: scale(1.03);
+            background-color: #a39a97;
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <a href="{{ url_for('home') }}">
+            <img src="{{ url_for('static', filename='logo.png') }}" alt="Logo" height="160">
+        </a>
+        <nav>
+            <a href="{{ url_for('Basics') }}">Basics</a>
+            <a href="{{ url_for('About') }}">About</a>
+            <a href="{{ url_for('Lineups') }}">Lineups</a>
+        </nav>
+    </header>
+
+    <div class="map-grid">
+        {% for map in maps %}
+        <a class="map-button" href="{{ url_for('map_detail', slug=map.slug) }}">
+            {{ map.name }}
+        </a>
+        {% endfor %}
+    </div>
+    <p>Pictures from : https://liquipedia.net/counterstrike/Portal:Maps/CS2 </p>
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script>
+        AOS.init({
+            duration: 800,
+            once: true
+        });
+    </script>
+
+    <script>
+    let lastScroll = 0;
+    const header = document.querySelector('header');
+
+    window.addEventListener('scroll', () => {
+        const currentScroll = window.scrollY;
+
+        if (currentScroll > lastScroll && currentScroll > 80) {
+            // Scrolling down - hide header
+            header.style.transform = 'translateY(-100%)';
+            header.style.transition = 'transform 0.3s ease';
+        } else {
+            // Scrolling up - show header
+            header.style.transform = 'translateY(0)';
+            header.style.transition = 'transform 0.3s ease';
+        }
+
+        lastScroll = currentScroll;
+    });
+    </script>
+</body>
+</html>
