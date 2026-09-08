@@ -40,7 +40,7 @@
             bottom: 1.5rem;
             left: 1.5rem;
             text-align: center;
-            font-size: 1.5rem;
+            font-size: 1rem;
         }
 
         .leetify-credit p {
@@ -121,7 +121,7 @@
 
     <div class="layout">
         <div class="player-name ">
-                <img src="{{ steaminfo.Avatar }}" alt="Profile Avatar" height ="400">
+                <img src="{{ steaminfo.Avatar }}" alt="Profile Avatar" height ="480">
                 <p>{{ steaminfo.Name }}</p>
         </div>
 
@@ -131,6 +131,13 @@
                 <summary>{{ stat.name }}: {{ stat.label }}</summary>
                 <div class="stat-detail">
                     {{ stat.value }}
+                    <p> {{ stat.recommendation.text }} </p>
+                    <ol>
+                        {% for hel in stat.recommendation.help %}
+                        <li>{{ hel }}</li>
+                        {% endfor %}
+                    </ol>
+                    <img src="{{ url_for('static', filename='gifs/' ~ stat.recommendation.gif) }}" alt="{{ stat.name }}">
                 </div>
             </details>
             {% endfor %}
