@@ -126,6 +126,7 @@
         </div>
 
         <div class="stats">
+            <p style = "font-size: 24px">Past 30 Days: </p>
             {% for stat in stats %}
             <details class="stat-row {{ stat.color }}">
                 <summary>{{ stat.name }}: {{ stat.label }}</summary>
