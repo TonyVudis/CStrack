@@ -1,0 +1,139 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>About Page</title>
+    <style>
+
+        @import url('https://fonts.googleapis.com/css2?family=Black+Ops+One&display=swap');
+
+        .black-ops-one-regular {
+        font-family: "Black Ops One", system-ui;
+        font-weight: 400;
+        font-style: normal;
+        }
+
+        body {
+            font-family: "Black Ops One";
+            margin: 0;
+            background-color: #BDB7AB;
+            color: #2b0505;
+        }
+
+        header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0.5rem 3rem;
+            background-color: #877F7D;
+            border-bottom: 0.5px solid #6b1a1a;
+        }
+
+        header nav a {
+            margin-left: 1.5rem;
+            font-size: 1.5rem;
+            text-decoration: none;
+            color: #2b0505;
+        }
+
+        .layout {
+            display: flex;
+            padding: 2rem;
+            gap: 2rem;
+        }
+
+        .Picture-of-me {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            font-size: 2.5rem;
+        }
+
+        .info {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            font-size: 1.5rem;
+        }
+
+        .Linkdin {
+            bottom: 1.5rem;
+            left: 1.5rem;
+            text-align: center;
+            font-size: 1.25rem;
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <a href="{{ url_for('home') }}">
+            <img src="{{ url_for('static', filename='logo.png') }}" alt="Logo" height="160">
+        </a>
+        <nav>
+            <a href="{{ url_for('Basics') }}">Basics</a>
+            <a href="{{ url_for('About') }}">About</a>
+            <a href="{{ url_for('Lineups') }}">Lineups</a>
+        </nav>
+    </header>
+
+    <div class="layout">
+        <div class="Picture-of-me ">
+                <img src="static/Tony.JPG" alt="Tony V" height ="650">
+        </div>
+
+        <div class="info">
+            <p>Hello, my name is Tony Vudis and this is my project I put together for fun! I wanted to experiment with a full stack application and deployment to get more experience programming. 
+                This application tracks your last 30 days in CS2 and gives you stats and recommendations on how to improve those statistics. I play a lot of CS2 in my free time so I thought this would be a fun
+                project to experiment with. I am a Data Science major at IU Indianapolis and I plan to graduate in 2028. Thank you for checking out my app and good luck with the CS2 games!
+            </p>
+            <div class = "Linkdin">
+                <p>The logo was made by my girlfriend! Check out her linkdin! <a href="https://www.linkedin.com/in/emily-breedlove-989a7b28a/">https://www.linkedin.com/in/emily-breedlove-989a7b28a/</a></p>
+                <p>Check out my Linkedin! <a href="https://www.linkedin.com/in/tony-vudis-9b3077366/">https://www.linkedin.com/in/tony-vudis-9b3077366/</a></p>
+            </div>
+
+        </div>
+    </div>
+
+
+
+
+
+
+
+
+
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script>
+        AOS.init({
+            duration: 800,
+            once: true
+        });
+    </script>
+
+    <script>
+    let lastScroll = 0;
+    const header = document.querySelector('header');
+
+    window.addEventListener('scroll', () => {
+        const currentScroll = window.scrollY;
+
+        if (currentScroll > lastScroll && currentScroll > 80) {
+            // Scrolling down - hide header
+            header.style.transform = 'translateY(-100%)';
+            header.style.transition = 'transform 0.3s ease';
+        } else {
+            // Scrolling up - show header
+            header.style.transform = 'translateY(0)';
+            header.style.transition = 'transform 0.3s ease';
+        }
+
+        lastScroll = currentScroll;
+    });
+    </script>
+
+</body>
