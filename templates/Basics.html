@@ -1,0 +1,162 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Basics</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Black+Ops+One&display=swap');
+
+        body {
+            font-family: "Black Ops One";
+            margin: 0;
+            background-color: #BDB7AB;
+            color: #2b0505;
+        }
+
+        header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0.5rem 3rem;
+            background-color: #877F7D;
+            border-bottom: 0.5px solid #6b1a1a;
+        }
+
+        header nav a {
+            margin-left: 1.5rem;
+            font-size: 1.5rem;
+            text-decoration: none;
+            color: #2b0505;
+        }
+
+        .split-container {
+            display: flex;
+            max-width: 1100px;
+            margin: 3rem auto;
+            padding: 0 2rem;
+        }
+
+        .split-half {
+            flex: 1;
+            padding: 0 2rem;
+        }
+
+        .split-half h2 {
+            text-align: center;
+            font-size: 2.5rem;
+        }
+
+        .split-half .info-box {
+            background-color: #969494;
+            font-family: "Black Ops One";
+            border-radius: 12px;
+            font-size: 1.5rem;
+            padding: 1.25rem;
+            font-family: sans-serif;
+            color: #2b0505;
+            min-height: 200px;
+        }
+
+        .split-divider {
+            width: 2px;
+            background-color: #6b1a1a;
+            margin: 0 1rem;
+        }
+
+        .video-section {
+            max-width: 500px;
+            margin: 2rem auto 4rem;
+            text-align: center;
+        }
+
+        .video-section a {
+            display: inline-block;
+            position: relative;
+        }
+
+        .video-section img {
+            width: 100%;
+            border-radius: 12px;
+            display: block;
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <a href="{{ url_for('home') }}">
+            <img src="{{ url_for('static', filename='logo.png') }}" alt="Logo" height="160">
+        </a>
+        <nav>
+            <a href="{{ url_for('Basics') }}">Basics</a>
+            <a href="{{ url_for('About') }}">About</a>
+            <a href="{{ url_for('Lineups') }}">Lineups</a>
+        </nav>
+    </header>
+
+    <div class="split-container">
+        <div class="split-half">
+            <h2>Basics</h2>
+            <div class="info-box">
+                <td>
+                -In counter strike there are a terrorist(T) side and a counter terrorist(CT) side.<br> -You will start on either or depending on the game and each game goes for 12 rounds on each side until
+                a team wins 13 rounds or there is a tie(when score is 12-12).<br> -Your goal as a T is to plant the bomb and have it explode or to kill all CTs. <br>-Each round you buy guns and earn money to win 
+                the next round and so on. <br>-The game compensates winners with more money and losers with some money.<br> -ECONOMY IS KEY.
+                </td>
+            </div>
+        </div>
+
+        <div class="split-divider"></div>
+
+        <div class="split-half">
+            <h2>Economy </h2>
+            <div class="info-box">
+                -Every game and half(12 rounds) you start with a pistol and 800 dollars<br> -Pistol rounds are important becuase, if you win you get the upper hand on the enemy with money
+                and they either have to buy nothing or force which could make them more poor if they lose.<br> -Planting the bomb as a T gives you lots of money so even if you will lose, still go for 
+                a bomb plant <br>-As you win more rounds it gives you headroom to lose 1 or two or to buy expensive guns such as the AWP <br>-You want to get as many kills as you can because, kills give you 300$ each
+                <br>-Utility also costs lots of money so if you want a good gun but no utility it poses a risk rather than buying a ok gun and all utility            
+            </div>
+        </div>
+    </div>
+
+    <div class="video-section">
+        <p>
+            Also watch this video it explains Counter-Strike well Creator: CS Ghost Animation
+        </p>
+        <a href="https://www.youtube.com/watch?v=RIZWzT_RL6Y" target="_blank" rel="noopener noreferrer">
+            <img src="https://img.youtube.com/vi/RIZWzT_RL6Y/hqdefault.jpg" alt="Video thumbnail">
+        </a>
+    </div>
+
+
+
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script>
+        AOS.init({
+            duration: 800,
+            once: true
+        });
+    </script>
+
+    <script>
+    let lastScroll = 0;
+    const header = document.querySelector('header');
+
+    window.addEventListener('scroll', () => {
+        const currentScroll = window.scrollY;
+
+        if (currentScroll > lastScroll && currentScroll > 80) {
+            // Scrolling down - hide header
+            header.style.transform = 'translateY(-100%)';
+            header.style.transition = 'transform 0.3s ease';
+        } else {
+            // Scrolling up - show header
+            header.style.transform = 'translateY(0)';
+            header.style.transition = 'transform 0.3s ease';
+        }
+
+        lastScroll = currentScroll;
+    });
+    </script>
+
+</body>
