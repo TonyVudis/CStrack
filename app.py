@@ -55,13 +55,13 @@ def go():
 @app.route('/Lineups')
 def Lineups():
     maps = [
-        {'name': 'Mirage', 'slug': 'Mirage'},
-        {'name': 'Inferno', 'slug': 'Inferno'},
-        {'name': 'Nuke', 'slug': 'Nuke'},
-        {'name': 'Ancient', 'slug': 'Ancient'},
-        {'name': 'Anubis', 'slug': 'Anubis'},
-        {'name': 'Dust 2', 'slug': 'Dust2'},
-        {'name': 'Cache', 'slug': 'Cache'}
+        {'name': 'Mirage', 'slug': 'Mirage', 'image': 'Mirage.png'},
+        {'name': 'Inferno', 'slug': 'Inferno', 'image': 'Inferno.png'},
+        {'name': 'Nuke', 'slug': 'Nuke', 'image': 'Nuke.png'},
+        {'name': 'Ancient', 'slug': 'Ancient', 'image': 'Ancient.png'},
+        {'name': 'Anubis', 'slug': 'Anubis', 'image': 'Anubis.png'},
+        {'name': 'Dust 2', 'slug': 'Dust2', 'image': 'Dust2.jpg'},
+        {'name': 'Cache', 'slug': 'Cache', 'image': 'Cache.png'}
     ]
     return render_template('Lineups.html', maps=maps)
 
