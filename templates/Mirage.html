@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Mirage</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Black+Ops+One&display=swap');
+
+        .black-ops-one-regular {
+        font-family: "Black Ops One", system-ui;
+        font-weight: 400;
+        font-style: normal;
+        }
+
+        body {
+            font-family: "Black Ops One";
+            margin: 0;
+            background-color: #BDB7AB;
+            color: #2b0505;
+        }
+
+        header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0.5rem 3rem;
+            background-color: #877F7D;
+            border-bottom: 0.5px solid #6b1a1a;
+        }
+
+        header nav a {
+            margin-left: 1.5rem;
+            font-size: 1.5rem;
+            text-decoration: none;
+            color: #2b0505;
+        }
+
+        .line-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 1.5rem;
+            padding: 3rem;
+            max-width: 900px;
+            margin: 0 auto;
+        }
+
+        .vid-item video {
+            width: 100%;
+            border-radius: 12px;
+            display: block;
+        }
+
+        .vid-item figcaption {
+            text-align : center;
+            margin-top: 0.5rem;
+            font-size: 2.0rem;
+        }
+
+        .vid-layout {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 1.5rem;
+            padding: 3rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+    </style>
+</head>
+<body>
+    <header>
+        <a href="{{ url_for('home') }}">
+            <img src="{{ url_for('static', filename='logo.png') }}" alt="Logo" height="160">
+        </a>
+        <nav>
+            <a href="{{ url_for('Basics') }}">Basics</a>
+            <a href="{{ url_for('About') }}">About</a>
+            <a href="{{ url_for('Lineups') }}">Lineups</a>
+        </nav>
+    </header>
+
+    <div class="vid-layout">
+        <figure class="vid-item">
+            <video src="{{ url_for('static', filename='Mirage/mirageaexecT.mp4') }}" autoplay loop muted playsinline></video>
+            <figcaption>A execute</figcaption>
+        </figure>
+        <figure class="vid-item">
+            <video src="{{ url_for('static', filename='Mirage/miragebexecT.mp4') }}" autoplay loop muted playsinline></video>
+            <figcaption>B execute</figcaption>
+        </figure>
+        <figure class="vid-item">
+            <video src="{{ url_for('static', filename='Mirage/miragemidsmokeT.mp4') }}" autoplay loop muted playsinline></video>
+            <figcaption>Mid smoke T</figcaption>
+        </figure>
+        <figure class="vid-item">
+            <video src="{{ url_for('static', filename='Mirage/mirageapopCT.mp4') }}" autoplay loop muted playsinline></video>
+            <figcaption>Pop flash for A CT</figcaption>
+        </figure>
+        <figure class="vid-item">
+            <video src="{{ url_for('static', filename='Mirage/mirageasmokeCT.mp4') }}" autoplay loop muted playsinline></video>
+            <figcaption>Palace smoke for A CT</figcaption>
+        </figure>
+    </div>
+
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script>
+        AOS.init({
+            duration: 800,
+            once: true
+        });
+    </script>
+
+    <script>
+    let lastScroll = 0;
+    const header = document.querySelector('header');
+
+    window.addEventListener('scroll', () => {
+        const currentScroll = window.scrollY;
+
+        if (currentScroll > lastScroll && currentScroll > 80) {
+            // Scrolling down - hide header
+            header.style.transform = 'translateY(-100%)';
+            header.style.transition = 'transform 0.3s ease';
+        } else {
+            // Scrolling up - show header
+            header.style.transform = 'translateY(0)';
+            header.style.transition = 'transform 0.3s ease';
+        }
+
+        lastScroll = currentScroll;
+    });
+    </script>
+<body>
+<html>

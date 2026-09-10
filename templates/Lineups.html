@@ -45,21 +45,29 @@
 
         .map-button {
             display: flex;
-            align-items: center;
+            align-items: flex-end;
             justify-content: center;
             aspect-ratio: 16 / 9;
-            background-color: #877F7D;
-            color: #2b0505;
-            font-weight: 600;
-            font-size: 1.25rem;
-            text-decoration: none;
+            background-size: cover;
+            background-position: center;
             border-radius: 12px;
-            transition: transform 0.15s ease, background-color 0.15s ease;
+            overflow: hidden;
+            text-decoration: none;
+            transition: transform 0.15s ease;
         }
 
         .map-button:hover {
             transform: scale(1.03);
-            background-color: #a39a97;
+        }
+
+        .map-label {
+            width: 100%;
+            padding: 0.6rem 0;
+            text-align: center;
+            font-weight: 600;
+            font-size: 1.25rem;
+            color: #6b1a1a;
+            background: linear-gradient(to top, rgba(0,0,0,0.75), transparent);
         }
     </style>
 </head>
@@ -78,12 +86,16 @@
 
     <div class="map-grid">
         {% for map in maps %}
-        <a class="map-button" href="{{ url_for('map_detail', slug=map.slug) }}">
-            {{ map.name }}
+        <a class="map-button" 
+            href="{{ url_for('map_detail', slug=map.slug) }}"
+            style="background-image: url('{{ url_for('static', filename='mapimages/' ~ map.image) }}');">
+                <span class="map-label">{{ map.name }}</span>
         </a>
         {% endfor %}
     </div>
-    <p>Pictures from : https://liquipedia.net/counterstrike/Portal:Maps/CS2 </p>
+
+    <p style = "text-align: center">Pictures from : https://liquipedia.net/counterstrike/Portal:Maps/CS2 </p>
+
     <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
     <script>
         AOS.init({
