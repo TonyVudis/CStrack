@@ -35,15 +35,17 @@
         }
 
         .map-grid {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
             gap: 1.5rem;
-            padding: 3rem;
-            max-width: 900px;
+            padding: 4rem;
+            max-width: 1200px;
             margin: 0 auto;
         }
 
         .map-button {
+            width: calc(50% - 1rem);
             display: flex;
             align-items: flex-end;
             justify-content: center;
