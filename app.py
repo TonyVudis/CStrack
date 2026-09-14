@@ -18,7 +18,7 @@ secret_key = os.getenv('Flash_key')
 leetify_api_key = os.getenv('Leetify_API_key')
 steam_api_key = os.getenv('Steam_API_key')
 
-limiter = Limiter(get_remote_address, app=app, default_limits=["200 per hour"])#Limit per hour for API requests
+limiter = Limiter(get_remote_address, app=app, default_limits=["100 per hour"])#Limit per hour for API requests
 
 #Connects to DB 
 def get_db_connection(Db_password, Db_user, Localhost, Db_name, Port):
@@ -70,7 +70,7 @@ def map_detail(slug):
     return render_template(f'{slug}.html')
 
 @app.route('/lookup/<steam_id>')#Route for lookup
-@limiter.limit("1 per 5 seconds")#Limit per second
+@limiter.limit("1 per 8 seconds")#Limit per second
 
 
 #Leetify API - Connection with database
