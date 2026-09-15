@@ -1,6 +1,5 @@
 import pandas as pd
 from datetime import date, timedelta
-from sync import pull_leetify_prof
 today = date.today()
 past_30_days = today - timedelta(days=30)
 
