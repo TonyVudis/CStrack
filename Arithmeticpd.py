@@ -4,9 +4,6 @@ from sync import pull_leetify_prof
 today = date.today()
 past_30_days = today - timedelta(days=30)
 
-from flask import Flask, redirect, flash, url_for
-app = Flask(__name__)
-
 '''
 stats to query for arithmetic
 -Player
