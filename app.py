@@ -90,7 +90,7 @@ def lookup(steam_id):
     cur.close()
     conn.close()
 
-    if leetresult is None or steamresult is None:
+    if leetresult is None or steamresult['personname'] == None:
         flash("Couldnt find that Player - check Steam ID and make sure your account is public")
         return redirect(url_for('home'))
     
