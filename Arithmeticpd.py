@@ -103,9 +103,6 @@ def Goodishigher(source, high, low): #JUDGEMENT OF MEANS IN FUNCTION
 
 def past_month(leetdata):
     #sifting through for needed information
-    if leetdata is None:
-        flash("Couldnt find that Player - Make sure to link Steam Account and Leetify on Leetify's website")
-        return redirect(url_for('home'))
     temp = pd.DataFrame(leetdata)
     last_30 = temp[temp["finished_at"] >= str(past_30_days)]
     statsstart = pd.DataFrame(last_30['stats'])
