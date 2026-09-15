@@ -2,6 +2,7 @@ from flask import Flask, render_template, redirect, url_for, flash, request
 from flask_limiter import Limiter
 from flask_limiter.util import get_remote_address
 from sync import pull_leetify_prof, pull_steam_prof
+from Arithmeticpd import past_month
 import os
 from dotenv import load_dotenv
 import psycopg2
@@ -79,13 +80,6 @@ def lookup(steam_id):
     steamresult = pull_steam_prof(steam_id, steam_api_key)
     success = leetresult is not None
 
-    if leetresult is None:
-        flash("Couldnt find that Player - check Steam ID and try again")
-        return redirect(url_for('home'))
-    elif steamresult is None:
-        flash("Couldnt find that Player - check Steam ID and try again")
-        return redirect(url_for('home'))
-
     conn = get_db_connection(Db_password, Db_user, Localhost, Db_name, Port)
     cur = conn.cursor()
     cur.execute(
@@ -95,6 +89,17 @@ def lookup(steam_id):
     conn.commit()
     cur.close()
     conn.close()
+
+    if leetresult is None or steamresult is None:
+        flash("Couldnt find that Player - check Steam ID and make sure your account is public")
+        return redirect(url_for('home'))
+    
+
+    try:
+        stats = past_month(leetresult) 
+    except (KeyError, ValueError, IndexError):
+        flash("This player doesn't have a linked Leetify account or recent match history.")
+        return redirect(url_for('home'))
     
     return render_template('analysis.html', stats=leetresult, steaminfo=steamresult)
 
