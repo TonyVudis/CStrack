@@ -18,7 +18,7 @@ def pull_leetify_prof(steam_id, leet_api_key):
     )
 
     if leetresponse.status_code != 200:
-        return "There has been a issue getting your leetify information, try making your account public"
+        return None
 
     leetdata = leetresponse.json()
     return past_month(leetdata)
@@ -29,7 +29,7 @@ def pull_steam_prof(steam_id, steam_api_key):
     )
 
     if steamresponse.status_code != 200:
-        return "There has been a issue with getting your steam information, try making your account public"
+        return None
 
     datasteam = steamresponse.json()
     return steamaccsort(datasteam)
