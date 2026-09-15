@@ -25,7 +25,7 @@ def pull_leetify_prof(steam_id, leet_api_key):
 
 def pull_steam_prof(steam_id, steam_api_key):
     steamresponse = requests.get(
-        f"http://api.steampowered.com/ISteamUser/GetPlayerSummaries/v0002/?key={steam_api_key}&steamids={steam_id}"
+        f"https://api.steampowered.com/ISteamUser/GetPlayerSummaries/v0002/?key={steam_api_key}&steamids={steam_id}"
     )
 
     if steamresponse.status_code != 200:
