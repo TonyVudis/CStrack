@@ -94,13 +94,6 @@ def lookup(steam_id):
         flash("Couldnt find that Player - check Steam ID and make sure your account is public")
         return redirect(url_for('home'))
     
-
-    try:
-        stats = past_month(leetresult) 
-    except (KeyError, ValueError, IndexError):
-        flash("This player doesn't have a linked Leetify account or recent match history.")
-        return redirect(url_for('home'))
-    
     return render_template('analysis.html', stats=leetresult, steaminfo=steamresult)
 
 
