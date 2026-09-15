@@ -79,6 +79,13 @@ def lookup(steam_id):
     steamresult = pull_steam_prof(steam_id, steam_api_key)
     success = leetresult is not None
 
+    if leetresult is None:
+        flash("Couldnt find that Player - check Steam ID and try again")
+        return redirect(url_for('home'))
+    elif steamresult is None:
+        flash("Couldnt find that Player - check Steam ID and try again")
+        return redirect(url_for('home'))
+
     conn = get_db_connection(Db_password, Db_user, Localhost, Db_name, Port)
     cur = conn.cursor()
     cur.execute(
@@ -88,14 +95,7 @@ def lookup(steam_id):
     conn.commit()
     cur.close()
     conn.close()
-
-    if leetresult is None:
-        flash("Couldnt find that Player - check Steam ID and try again")
-        return redirect(url_for('home'))
-    elif steamresult is None:
-        flash("Couldnt find that Player - check Steam ID and try again")
-        return redirect(url_for('home'))
-
+    
     return render_template('analysis.html', stats=leetresult, steaminfo=steamresult)
 
 

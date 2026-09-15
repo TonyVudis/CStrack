@@ -1,7 +1,11 @@
 import pandas as pd
 from datetime import date, timedelta
+from sync import pull_leetify_prof
 today = date.today()
 past_30_days = today - timedelta(days=30)
+
+from flask import Flask, redirect, flash, url_for
+app = Flask(__name__)
 
 '''
 stats to query for arithmetic
@@ -99,6 +103,9 @@ def Goodishigher(source, high, low): #JUDGEMENT OF MEANS IN FUNCTION
 
 def past_month(leetdata):
     #sifting through for needed information
+    if leetdata is None:
+        flash("Couldnt find that Player - Make sure to link Steam Account and Leetify on Leetify's website")
+        return redirect(url_for('home'))
     temp = pd.DataFrame(leetdata)
     last_30 = temp[temp["finished_at"] >= str(past_30_days)]
     statsstart = pd.DataFrame(last_30['stats'])
