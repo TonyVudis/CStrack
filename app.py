@@ -15,7 +15,7 @@ Db_user = os.getenv('DB_USER')
 Localhost = os.getenv('DB_HOST')
 Port = os.getenv('PORT')
 Db_name = os.getenv('DB_NAME')
-secret_key = os.getenv('Flash_key')
+app.secret_key = os.getenv('Flash_key')
 leetify_api_key = os.getenv('Leetify_API_key')
 steam_api_key = os.getenv('Steam_API_key')
 
