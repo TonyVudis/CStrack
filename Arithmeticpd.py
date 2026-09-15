@@ -142,6 +142,10 @@ def past_month(leetdata):
 
 def steamaccsort(steamdata):
     players_list = steamdata.get('response', {}).get('players', [])
+
+    if players_list.empty:
+        return None
+    
     accinfo = pd.DataFrame(players_list)
     steaminfo = ({'Name': accinfo['personaname'].iloc[0], 'Avatar': accinfo['avatarfull'].iloc[0]})
 
