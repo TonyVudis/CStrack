@@ -31,6 +31,11 @@ def get_db_connection(Db_password, Db_user, Localhost, Db_name, Port):
         port = Port
     )
 
+@app.errorhandler(500)
+def handle_internal_server_error(error):
+    app.logger.exception("Internal server error: %s", error)
+    flash("Couldnt find that Player - check Steam ID and make sure you have a leetify account", "error")
+    return redirect(url_for("home"))
 
 @app.route('/')
 def home():
