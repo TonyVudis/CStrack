@@ -1,8 +1,11 @@
 import requests
 import json
 import os
+import logging
 from dotenv import load_dotenv
 from Arithmeticpd import past_month, steamaccsort
+
+logger = logging.getLogger(__name__)
 
 load_dotenv()
 leet_api_key = os.getenv('Leetify_API_key')
@@ -18,10 +21,24 @@ def pull_leetify_prof(steam_id, leet_api_key):
     )
 
     if leetresponse.status_code != 200:
+        logger.warning("Leetify match-history request failed with HTTP %s", leetresponse.status_code)
         return None
 
     leetdata = leetresponse.json()
-    return past_month(leetdata)
+    profileresponse = requests.get(
+        f"https://api-public.cs-prod.leetify.com/v3/profile?steam64_id={steam_id}",
+        headers=headers
+    )
+
+    if profileresponse.status_code != 200:
+        logger.warning(
+            "Leetify profile request failed with HTTP %s; continuing without Premier rank",
+            profileresponse.status_code,
+        )
+        return past_month(leetdata)
+
+    profile_data = profileresponse.json()
+    return past_month(leetdata, profile_data)
 
 def pull_steam_prof(steam_id, steam_api_key):
     steamresponse = requests.get(
@@ -29,6 +46,7 @@ def pull_steam_prof(steam_id, steam_api_key):
     )
 
     if steamresponse.status_code != 200:
+        logger.warning("Steam profile request failed with HTTP %s", steamresponse.status_code)
         return None
 
     datasteam = steamresponse.json()

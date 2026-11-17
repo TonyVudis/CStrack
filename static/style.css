@@ -213,11 +213,15 @@ a {
     align-items: start;
 }
 
-.Picture-of-me,
-.player-name {
+.Picture-of-me {
     align-items: stretch !important;
     justify-content: flex-start !important;
     font-size: inherit !important;
+}
+
+.player-name {
+    align-items: center !important;
+    justify-content: center !important;
 }
 
 .Picture-of-me img,
