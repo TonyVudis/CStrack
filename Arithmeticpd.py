@@ -1,5 +1,6 @@
 import pandas as pd
 from datetime import date, timedelta
+
 today = date.today()
 past_30_days = today - timedelta(days=30)
 
@@ -9,11 +10,11 @@ stats to query for arithmetic
 preaim
 reaction_time
 accuracy
-kd_ratio
-trade_kills_success_percentage -- percent of trading kills
+--kd_ratio
+--trade_kills_success_percentage -- percent of trading kills
 accuracy_head
 counter_strafing_shots_good_ratio
-utility_on_death_avg -- means how long you hold on to util (higher is better performance)
+--utility_on_death_avg -- means how long you hold on to util (higher is better performance)
 --WINRATE = rounds_won > rounds_lost == count wins/losses
 '''
 
@@ -97,10 +98,13 @@ def Goodishigher(source, high, low): #JUDGEMENT OF MEANS IN FUNCTION
     else:
         return 'red', 'Needs Work'
 
-def past_month(leetdata):
+def past_month(leetdata, profile_data=None):
     #sifting through for needed information
     temp = pd.DataFrame(leetdata)
     last_30 = temp[temp["finished_at"] >= str(past_30_days)]
+
+    premier_rank = (profile_data.get('ranks') or {}).get('premier') if profile_data else None
+
     statsstart = pd.DataFrame(last_30['stats'])
     statsmiddle = pd.DataFrame(statsstart.explode('stats').reset_index(drop=True))
     statsunpack = pd.json_normalize(statsmiddle['stats'])
@@ -136,6 +140,29 @@ def past_month(leetdata):
 
     color, label = Goodislower(means['utility_on_death_avg'], 200.0, 350.0)
     stats.append({'name': 'Utility', 'value': "{:.5}".format(means['utility_on_death_avg']), 'color': color, 'label': label, 'recommendation' : recommend.get(('utility_on_death_avg'), '')})
+
+    if premier_rank is not None:
+        if premier_rank < 5000:
+            rank_color = 'premier-rank-0-4999'
+        elif premier_rank < 10000:
+            rank_color = 'premier-rank-5000-9999'
+        elif premier_rank < 15000:
+            rank_color = 'premier-rank-10000-14999'
+        elif premier_rank < 20000:
+            rank_color = 'premier-rank-15000-19999'
+        elif premier_rank < 25000:
+            rank_color = 'premier-rank-20000-24999'
+        elif premier_rank < 30000:
+            rank_color = 'premier-rank-25000-29999'
+        else:
+            rank_color = 'premier-rank-30000-plus'
+
+        stats.append({
+            'name': 'Premier Rank',
+            'value': str(premier_rank),
+            'color': rank_color,
+            'label': str(premier_rank),
+        })
   
     html_display = statsunpack.to_html(max_cols = None, max_rows= None)
     return stats

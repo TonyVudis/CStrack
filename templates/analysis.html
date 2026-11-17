@@ -54,14 +54,69 @@
             gap: 2rem;
         }
 
-        .player-name {
+        .layout .player-name {
             flex: 1;
             display: flex;
             flex-direction: column;
-            align-items: center;
-            justify-content: center;
+            align-items: center !important;
+            justify-content: center !important;
             text-align: center;
-            font-size: 2.5rem;
+            font-size: 1.75rem !important;
+        }
+
+        .player-name > p {
+            margin: 1rem 0;
+            text-align: center;
+        }
+
+        .premier-rank {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+            font-family: "Stratum 2", "Stratum2", "Rajdhani", sans-serif;
+        }
+
+        .premier-rank-label {
+            font-size: 1.15rem;
+        }
+
+        .premier-rank-value {
+            display: inline-block;
+            padding: 0.05em 0.4em;
+            border-radius: 0.12em;
+            color: #fff;
+            font-size: 2rem;
+            line-height: 1.05;
+            text-shadow: -2px -2px 0 #222, 2px -2px 0 #222, -2px 2px 0 #222, 2px 2px 0 #222;
+        }
+
+        .premier-rank-0-4999 {
+            background-color: #aebfd1;
+        }
+
+        .premier-rank-5000-9999 {
+            background-color: #70a6d7;
+        }
+
+        .premier-rank-10000-14999 {
+            background-color: #5b67e8;
+        }
+
+        .premier-rank-15000-19999 {
+            background-color: #8e45ea;
+        }
+
+        .premier-rank-20000-24999 {
+            background-color: #b52abe;
+        }
+
+        .premier-rank-25000-29999 {
+            background-color: #eb4a5a;
+        }
+
+        .premier-rank-30000-plus {
+            background-color: #d4c326;
         }
 
         .stats {
@@ -125,15 +180,25 @@
         <div class="player-name ">
                 <img src="{{ steaminfo.Avatar }}" alt="Profile Avatar" height ="480">
                 <p>{{ steaminfo.Name }}</p>
+                {% for stat in stats %}
+                    {% if stat.name == 'Premier Rank' %}
+                <div class="premier-rank">
+                    <span class="premier-rank-label">Premier Rank</span>
+                    <strong class="premier-rank-value {{ stat.color }}">{{ stat.value }}</strong>
+                </div>
+                    {% endif %}
+                {% endfor %}
         </div>
 
         <div class="stats">
             <p style = "font-size: 24px">Past 30 Days: </p>
             {% for stat in stats %}
+            {% if stat.name != 'Premier Rank' %}
             <details class="stat-row {{ stat.color }}">
                 <summary>{{ stat.name }}: {{ stat.label }}</summary>
                 <div class="stat-detail">
                     {{ stat.value }}
+                    {% if stat.recommendation %}
                     <p> {{ stat.recommendation.text }} </p>
                     <ol>
                         {% for hel in stat.recommendation.help %}
@@ -141,8 +206,10 @@
                         {% endfor %}
                     </ol>
                     <img src="{{ url_for('static', filename='gifs/' ~ stat.recommendation.gif) }}" alt="{{ stat.name }}">
+                    {% endif %}
                 </div>
             </details>
+            {% endif %}
             {% endfor %}
 
             <div class="leetify-credit">

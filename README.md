@@ -56,3 +56,9 @@ lineups.
 - Basics: CS2 basics
 - Lineups: map lineup guides
 - About: project information
+
+## References
+
+- Dataset for judging metrics: <https://drillmaster.pro/en/benchmarks?utm_source=chatgpt.com>
+- The dataset is unofficial; its claim that the metrics are based on over
+  4 million Leetify players in 2026 has not been independently verified. This will be potentially used later on.
