@@ -37,6 +37,11 @@ def handle_internal_server_error(error):
     flash("Couldnt find that Player - check Steam ID and make sure you have a leetify account", "error")
     return redirect(url_for("home"))
 
+@app.errorhandler(429)
+def handle_too_many_requests(error):
+    flash("Too many requests. Please wait a moment before trying again.")
+    return redirect(url_for("home"))
+
 @app.route('/')
 def home():
     return render_template('home.html')
